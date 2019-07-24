@@ -1,0 +1,58 @@
+providers:
+  messagebird:
+    access_key: 'live_qKwVZ02ULV70GqabBYxLU8d5r'
+    debug: true
+  nexmo:
+    api_key: '18e0a6e9'
+    api_secret: 'ea44c2d9'
+  infobip:
+    token: "sasasa"
+    secret: "sasasa"
+  exotel:
+    account_sid: 'sachet'
+    auth_token: 'bbba3f4afc0b4ee76c93e43b7c1b2d4350d1a0e8'
+  twilio:
+    account_sid: 'aCb3bbaacc554b'
+    auth_token: '4736473aaabbcc66'
+  turbosms:
+    login: 'visla'
+    password: '44444'
+  cm:
+    producttoken: '00000000-0000-0000-0000-000000000000'
+  telegram:
+    token: "724679217:aa26V5mK3e2qkGsSlTT-iHreaa5FUyy3Z_0"
+  otc:
+    identity_endpoint: https://iam.eu-de.otc.t-systems.com:443/v3/auth/tokens
+    domain_name: domain_name
+    project_name: project_name
+    username: username
+    password: password
+    project_id: project_id
+  mediaburst:
+    api_key: 'aa66sdfasfsda7887fdsf7sdf87fsdf7sdf7dsfd'
+  freemobile:
+    username: 'my-user-name'
+    password: 'secret'
+    url: "https://smsapi.free-mobile.fr/sendmsg"
+  aspsms:
+    username: 'username'
+    password: 'password'
+  sipgate:
+    username: 'username'
+    password: 'password'
+
+templates:
+  - telegram.tmpl
+
+receivers:
+  - name: 'team-sms'
+    provider: 'messagebird'
+    to:
+      - '+919742033616'
+    from: '08039591643'
+  - name: 'team-chat'
+    provider: 'telegram'
+    to:
+      - '164451814' # the chat id of a user. Get yours at https://telegram.me/userinfobot
+    text: '{{ .GroupLabels.alertname }} @ {{ .Labels.instance }}: {{ .Status | toUpper }}'
+
